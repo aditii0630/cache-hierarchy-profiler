@@ -1,0 +1,56 @@
+╔══════════════════════════════════════════════════════╗
+║        Cache Hierarchy Performance Profiler          ║
+║        Aditi Shankar | BITS Pilani Goa               ║
+╚══════════════════════════════════════════════════════╝
+
+Size          Sequential(ns)    Random(ns)        Region    
+----          --------------    ----------        ------    
+  4 KB        2.534             5.520             L1 cache
+  8 KB        2.561             5.512             L1 cache
+ 16 KB        2.523             5.513             L1 cache
+ 64 KB        2.625             8.195             L2 cache
+128 KB        2.622             5.540             L1 cache
+256 KB        2.627             5.595             L1 cache
+  1 MB        2.894             20.423            L2 cache
+  4 MB        2.861             11.675            L2 cache
+  8 MB        3.187             24.873            L2 cache
+ 16 MB        4.070             72.487            L3 cache
+ 64 MB        4.330             109.233           DRAM
+128 MB        4.391             116.901           DRAM
+256 MB        4.426             79.966            L3 cache
+
+── Cache Boundaries Detected ─────────────────────────
+  → Boundary near 1 MB      (3.6x latency jump)
+  → Boundary near 8 MB      (2.1x latency jump)
+  → Boundary near 16 MB     (2.9x latency jump)
+
+── CSV (for plotting) ────────────────────────────────
+size_bytes,seq_ns,rnd_ns
+4096,2.534,5.520
+8192,2.561,5.512
+16384,2.523,5.513
+65536,2.625,8.195
+131072,2.622,5.540
+262144,2.627,5.595
+1048576,2.894,20.423
+4194304,2.861,11.675
+8388608,3.187,24.873
+16777216,4.070,72.487
+67108864,4.330,109.233
+134217728,4.391,116.901
+268435456,4.426,79.966
+
+── Stride Sweep (cache line size detection) ──────────
+Stride(B)     Latency(ns)       Note
+---------     -----------       ----
+1             2.919             
+2             2.906             
+4             2.895             
+8             2.912             
+16            2.919             
+32            3.000             
+64            3.266             
+128           3.599             
+256           3.751             
+
+Cache line size = stride where latency stops increasing
